@@ -303,5 +303,20 @@
             }
         });
     </script>
+<script>
+    // Wait for page to load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find ALL elements with the play-again-btn class
+        const playAgainButtons = document.querySelectorAll('.play-again-btn');
+        
+        // Make each one work
+        playAgainButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Change this to your actual start page
+                window.location.href = 'index.html';
+            });
+        });
+    });
+</script>
 </body>
 </html>
