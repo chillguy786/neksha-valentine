@@ -243,16 +243,6 @@
             noButton.style.transition = 'all 0.3s ease';
             noClickCount++;
         }
-
-        noButton.addEventListener('mouseenter', moveButton);
-        noButton.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            moveButton();
-        });
-        noButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            moveButton();
-        });
         .no-button:hover {
     transform: translateY(-3px) !important;
     box-shadow: 0 6px 20px rgba(255, 180, 71, 0.4) !important;
