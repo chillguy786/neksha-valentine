@@ -198,8 +198,16 @@
             <span class="fade-in-text" id="typewriter">I love you, Neksha &#10084;&#65039; </span>
         </div>
         <p class="subtext">Happy Valentine's Day.</p>
-        <button class="play-again-btn"onc=window.loaction.href='https://chillguy786.github.io/neksha-valentine/index.html'">Play Again</button>
-    <script>
+        <button class="play-again-btn" id="playAgainBtn">Play Again</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('playAgainBtn').addEventListener('click', function() {
+        window.location.href = 'https://chillguy786.github.io/neksha-valentine/index.html';
+    });
+});
+</script>
+        <script>
         // Generate falling hearts (heart rain)
         function createFallingHeart() {
             const heartRain = document.getElementById('heartRain');
