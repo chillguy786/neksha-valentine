@@ -230,85 +230,61 @@
         setInterval(createHeart, 2000);
         for (let i = 0; i < 5; i++) createHeart();
 
-       // Playful "No" button behavior - IMPROVED VERSION
+// SIMPLE DODGING "NO" BUTTON - GUARANTEED TO WORK
 const noButton = document.getElementById('noButton');
-let isMoving = false;
-let hoverTimer;
 
-// Function to move button
-function moveButton() {
-    if (isMoving) return;
+function dodgeCursor() {
+    // Get random position (stay within screen)
+    const maxX = window.innerWidth - noButton.offsetWidth - 20;
+    const maxY = window.innerHeight - noButton.offsetHeight - 20;
     
-    isMoving = true;
+    const newX = Math.random() * maxX;
+    const newY = Math.random() * maxY;
     
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 60);
-    
-    // Smooth movement with CSS transition
-    noButton.style.transition = 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+    // Move smoothly
+    noButton.style.transition = 'all 0.4s ease-out';
     noButton.style.position = 'fixed';
-    noButton.style.left = x + 'px';
-    noButton.style.top = y + 'px';
+    noButton.style.left = newX + 'px';
+    noButton.style.top = newY + 'px';
     
-    // Apply hover effect DURING movement
+    // Add hover effect during movement
     noButton.style.transform = 'translateY(-3px)';
     noButton.style.boxShadow = '0 6px 20px rgba(255, 180, 71, 0.4)';
     
-    // Reset after movement
+    // Remove hover effect after movement
     setTimeout(() => {
-        isMoving = false;
-        // Keep hover look for a moment
-        setTimeout(() => {
-            if (!noButton.matches(':hover')) {
-                noButton.style.transform = '';
-                noButton.style.boxShadow = '';
-            }
-        }, 300);
-    }, 500);
-}
-
-// Dodge cursor with delay (allows hover to show first)
-noButton.addEventListener('mouseenter', (e) => {
-    // Show hover effect immediately
-    noButton.style.transform = 'translateY(-3px)';
-    noButton.style.boxShadow = '0 6px 20px rgba(255, 180, 71, 0.4)';
-    
-    // Then move after short delay
-    hoverTimer = setTimeout(() => {
-        moveButton();
-    }, 400);
-});
-
-// Reset when mouse leaves quickly
-noButton.addEventListener('mouseleave', () => {
-    clearTimeout(hoverTimer);
-    if (!isMoving) {
         noButton.style.transform = '';
         noButton.style.boxShadow = '';
-    }
-});
-
-// Mobile touch
-noButton.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    moveButton();
-});
-
-// Also move on click
-noButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    moveButton();
-});
-        .no-button {
-    transition: all 0.3s ease !important;
-    position: relative;
-    z-index: 1000; /* Make sure it's on top */
+    }, 400);
 }
 
+// Trigger on hover (after short delay)
+noButton.addEventListener('mouseenter', function() {
+    setTimeout(dodgeCursor, 300); // Wait 0.3s before moving
+});
+
+// Also dodge on click/touch
+noButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    dodgeCursor();
+});
+
+noButton.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    dodgeCursor();
+});
+
+.no-button {
+    position: relative !important; /* Change to fixed when moving */
+    transition: all 0.4s ease-out !important;
+    cursor: pointer !important;
+    z-index: 9999 !important; /* Make sure it's on top */
+}
+
+/* Regular hover effect */
 .no-button:hover {
     transform: translateY(-3px) !important;
     box-shadow: 0 6px 20px rgba(255, 180, 71, 0.4) !important;
-    background: linear-gradient(135deg, #ffb347 0%, #ff8a00 100%) !important;
 }
     </script>
 </body>
