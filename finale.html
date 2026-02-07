@@ -318,27 +318,24 @@
         });
     });
     .fade-in-text {
-    
-    display: inline-block !important;
-    padding-right: 15px !important;
-    overflow: visible !important;
-    white-space: nowrap !important;
-    
-    
     opacity: 0;
-    animation: 
-        simpleFadeIn 2s ease-out 1s forwards,
-        blink-caret 0.75s step-end infinite 3s; /* Optional cursor blink */
-    
-    
-    border-right: none !important;
+    transform: translateY(20px);
+    animation: gentleFadeIn 2.5s ease-out 1s forwards;
+    display: inline-block;
+    padding-right: 15px;
+    white-space: nowrap;
+    font-size: inherit; /* Keep original text size */
+    color: inherit; /* Keep original text color */
 }
 
-
-@keyframes simpleFadeIn {
+@keyframes gentleFadeIn {
     0% {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(20px);
+    }
+    60% {
+        opacity: 0.8;
+        transform: translateY(-2px);
     }
     100% {
         opacity: 1;
@@ -346,10 +343,8 @@
     }
 }
 
-
-@keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: rgba(255, 107, 157, 0.75) }
+.fade-in-text {
+    text-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
 }
 </script>
 </body>
