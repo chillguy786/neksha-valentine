@@ -19,6 +19,11 @@
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="%23ff69b4" d="M10 18.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-6.55 8.53L10 18.35z"/></svg>') 10 10, auto;
         }
 
+        /* Smooth scrolling for entire page */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Floating hearts background */
         .heart-container {
             position: fixed;
@@ -35,6 +40,7 @@
             font-size: 2rem;
             opacity: 0.25;
             animation: float 10s ease-in-out infinite;
+            will-change: transform, opacity;
         }
 
         @keyframes float {
@@ -86,45 +92,22 @@
             transition: all 0.3s ease;
             animation: fadeIn 1.2s ease-out 5.7s both;
             margin: 60px 0;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .continue-btn:hover {
             background: #ff6b9d;
             color: white;
             box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+            transform: translateY(-2px);
         }
 
         .continue-btn:active {
             transform: scale(0.95);
         }
 
-.animated-char {
-            position: fixed;
-            font-size: 2.5rem;
-            opacity: 0.25;
-            animation: floatChar 8s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        @keyframes floatChar {
-            0%, 100% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0.25;
-            }
-            25% {
-                transform: translateY(-20px) translateX(10px) rotate(-8deg);
-                opacity: 0.35;
-            }
-            50% {
-                transform: translateY(-35px) translateX(-15px) rotate(3deg);
-                opacity: 0.3;
-            }
-            75% {
-                transform: translateY(-20px) translateX(8px) rotate(-4deg);
-                opacity: 0.35;
-            }
-        }
+        /* REMOVED: .animated-char class - no more floating stars/emojis */
 
         .image-card {
             background: white;
@@ -145,33 +128,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            /* REMOVED: Camera emoji 📸 */
+            /* REMOVED: Sparkle emoji 💫 */
             color: #ffb3c1;
+        }
+
+        /* Simple heart icon instead of camera */
+        .image-placeholder::before {
+            content: "❤️";
+            font-size: 3rem;
+            opacity: 0.7;
         }
 
         .image-card img {
             width: 100%;
             height: 300px;
             object-fit: cover;
-        }
-
-        .flutter {
-            animation: flutter 3s ease-in-out infinite;
-        }
-
-        @keyframes flutter {
-            0%, 100% {
-                transform: rotateZ(-1deg);
-            }
-            25% {
-                transform: rotateZ(2deg);
-            }
-            50% {
-                transform: rotateZ(-2deg);
-            }
-            75% {
-                transform: rotateZ(1.5deg);
-            }
         }
 
         @keyframes gentlePulse {
@@ -187,6 +159,18 @@
             from {
                 opacity: 0;
                 transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Added missing fadeIn animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
             }
             to {
                 opacity: 1;
@@ -221,74 +205,6 @@
             transform: rotate(-2deg) translateY(-5px);
         }
 
-        .question-section {
-            margin-top: 200px;
-            text-align: center;
-            animation: slideInFade 1.2s ease-out 6.6s both;
-        }
-
-        .question-intro {
-            font-size: clamp(1rem, 4vw, 1.3rem);
-            color: #d63384;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        .main-question {
-            font-size: clamp(1.8rem, 7vw, 2.8rem);
-            color: #c2185b;
-            font-weight: 300;
-            margin-bottom: 60px;
-            line-height: 1.6;
-            text-shadow: 0 0 30px rgba(255, 107, 157, 0.1);
-        }
-
-        .button-container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .button {
-            padding: 14px 32px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 50px;
-            color: white;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
-        }
-
-        .yes-button {
-            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
-            padding: 14px 40px;
-            font-size: 1.1rem;
-            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3), 0 0 20px rgba(255, 107, 157, 0.1);
-        }
-
-        .yes-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
-        }
-
-        .yes-button:active {
-            transform: scale(0.98);
-        }
-
-        .no-button {
-            background: linear-gradient(135deg, #ffc470 0%, #ffb347 100%);
-            padding: 14px 32px;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(255, 180, 71, 0.3);
-        }
-
-        .no-button:hover {
-            transform: translateX(0);
-        }
-
         @media (max-width: 768px) {
             .slides-container {
                 padding: 40px 20px;
@@ -296,10 +212,6 @@
 
             .slide {
                 margin: 80px 0;
-            }
-
-            .button-container {
-                gap: 15px;
             }
         }
 
@@ -310,10 +222,6 @@
 
             .slide-text {
                 font-size: 1.3rem;
-            }
-
-            .main-question {
-                font-size: 1.8rem;
             }
         }
     </style>
@@ -359,7 +267,7 @@
         </div>
 
         <div class="image-card" style="animation-delay: 5.7s;">
-            <div class="image-placeholder">📸</div>
+            <div class="image-placeholder"></div>
         </div>
 
         <div class="slide" style="animation-delay: 6.6s;">
@@ -369,7 +277,7 @@
         </div>
 
         <div class="image-card" style="animation-delay: 7.5s;">
-            <div class="image-placeholder">💫</div>
+            <div class="image-placeholder"></div>
         </div>
 
         <div class="slide" style="animation-delay: 8.4s;">
@@ -378,16 +286,8 @@
             </div>
         </div>
 
-        <button class="continue-btn" onclick="document.querySelector('.question-section').scrollIntoView({behavior: 'smooth'})" style="animation-delay: 9.3s;">Continue 💗</button>
-
-        <div class="question-section" style="animation-delay: 10.1s;">
-            <p class="question-intro">So I wanted to ask you something…</p>
-            <p class="main-question flutter">Will you be my Valentine?</p>
-            <div class="button-container">
-                <button class="button yes-button" onclick="window.location.href='finale.html'">Yes 💖</button>
-                <button class="button no-button" id="noButton">No 🙈</button>
-            </div>
-        </div>
+        <!-- CHANGED: Continue button now goes to valentine-question.html -->
+        <a href="valentine-question.html" class="continue-btn" style="animation-delay: 9.3s;">Continue 💗</a>
     </div>
 
     <script>
@@ -413,20 +313,28 @@
             setTimeout(() => heart.remove(), (duration + delay) * 1000);
         }
 
-        // Create hearts periodically
-        setInterval(createHeart, 1500);
-        
-        // Initial hearts (reduced)
-        for (let i = 0; i < 2; i++) {
-            createHeart();
-        }
-        
-        // Reduce heart generation frequency
-        clearInterval(createHeart);
-        setInterval(createHeart, 2500);
+        // Create hearts periodically - FIXED VERSION
+        let heartInterval;
 
-        // Heart cursor trail (improved with varied sparkles and colors)
-        const sparkles = ['✨', '💫', '⭐', '🌟'];
+        function setupHearts() {
+            // Clear any existing interval
+            if (heartInterval) {
+                clearInterval(heartInterval);
+            }
+            
+            // Create initial hearts
+            for (let i = 0; i < 2; i++) {
+                createHeart();
+            }
+            
+            // Set up periodic creation (slower frequency)
+            heartInterval = setInterval(createHeart, 2500);
+        }
+
+        // Start the heart generation
+        setupHearts();
+
+        // Heart cursor trail - REMOVED stars/emojis, only hearts
         document.addEventListener('mousemove', (e) => {
             if (Math.random() > 0.93) {
                 const trail = document.createElement('div');
@@ -436,45 +344,14 @@
                 trail.style.pointerEvents = 'none';
                 trail.style.fontSize = (0.6 + Math.random() * 0.4) + 'rem';
                 trail.style.opacity = (0.4 + Math.random() * 0.3).toString();
-                trail.style.color = ['#ff69b4', '#ff8fab', '#ffb3c1'][Math.floor(Math.random() * 3)];
-                trail.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+                trail.style.color = '#ff69b4';
+                trail.textContent = '💗'; // Only hearts, no stars
                 trail.style.animation = 'fadeOut 1.8s ease-out forwards';
                 
                 document.body.appendChild(trail);
                 
                 setTimeout(() => trail.remove(), 1800);
             }
-        });
-
-        // Playful "No" button behavior
-        const noButton = document.getElementById('noButton');
-        let noClickCount = 0;
-
-        function moveButton() {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 40);
-            noButton.style.position = 'fixed';
-            noButton.style.left = x + 'px';
-            noButton.style.top = y + 'px';
-            noButton.style.transition = 'all 0.3s ease';
-            noClickCount++;
-        }
-
-        // Desktop hover evasion
-        noButton.addEventListener('mouseenter', () => {
-            moveButton();
-        });
-
-        // Mobile touch evasion
-        noButton.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            moveButton();
-        });
-
-        // Also move on click attempts (backup)
-        noButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            moveButton();
         });
 
         const style = document.createElement('style');
@@ -492,36 +369,8 @@
         `;
         document.head.appendChild(style);
 
-        // Animated floating characters
-        const chars = ['💕', '🎀', '✨', '💖', '🌹'];
-        function createAnimatedChar() {
-            const char = document.createElement('div');
-            char.className = 'animated-char';
-            char.textContent = chars[Math.floor(Math.random() * chars.length)];
-            
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight / 2);
-            const delay = Math.random() * 3;
-            const duration = 8 + Math.random() * 4;
-            
-            char.style.left = x + 'px';
-            char.style.top = y + 'px';
-            char.style.animationDelay = delay + 's';
-            char.style.animationDuration = duration + 's';
-            
-            document.body.appendChild(char);
-            
-            setTimeout(() => char.remove(), (duration + delay) * 1000);
-        }
-
-        // Create animated characters periodically (less frequent)
-        setInterval(createAnimatedChar, 5000);
-        
-        // Initial characters
-        for (let i = 0; i < 2; i++) {
-            createAnimatedChar();
-        }
+        // REMOVED: Animated floating characters (stars/emojis)
+        // Only hearts remain
     </script>
 </body>
 </html>
-        
