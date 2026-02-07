@@ -318,19 +318,38 @@
         });
     });
     .typewriter {
-    overflow: visible !important;
+    
     display: inline-block !important;
     padding-right: 15px !important;
+    overflow: visible !important;
     white-space: nowrap !important;
-}
-    .typewriter {
+    
+    
     opacity: 0;
-    animation: fadeIn 2s ease-out 1s forwards;
+    animation: 
+        simpleFadeIn 2s ease-out 1s forwards,
+        blink-caret 0.75s step-end infinite 3s; /* Optional cursor blink */
+    
+    
+    border-right: none !important;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+
+@keyframes simpleFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: rgba(255, 107, 157, 0.75) }
 }
 </script>
 </body>
