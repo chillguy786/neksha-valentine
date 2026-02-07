@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe5ec 0%, #fff0f6 50%, #ffe0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 800px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-intro {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            color: #d63384;
+            margin-bottom: 30px;
+            font-weight: 300;
+            animation: slideIn 1s ease-out 0.5s both;
+        }
+
+        .main-question {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            color: #c2185b;
+            font-weight: 300;
+            margin-bottom: 60px;
+            line-height: 1.6;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.1);
+            animation: slideIn 1s ease-out 1s both;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .flutter {
+            animation: flutter 3s ease-in-out infinite;
+        }
+
+        @keyframes flutter {
+            0%, 100% {
+                transform: rotateZ(-1deg);
+            }
+            25% {
+                transform: rotateZ(2deg);
+            }
+            50% {
+                transform: rotateZ(-2deg);
+            }
+            75% {
+                transform: rotateZ(1.5deg);
+            }
+        }
+
+        .button-container {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 1.5s both;
+        }
+
+        .button {
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+            min-width: 150px;
+        }
+
+        .yes-button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3), 0 0 20px rgba(255, 107, 157, 0.1);
+        }
+
+        .yes-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .yes-button:active {
+            transform: scale(0.98);
+        }
+
+        .no-button {
+            background: linear-gradient(135deg, #ffc470 0%, #ffb347 100%);
+            position: relative;
+            box-shadow: 0 4px 15px rgba(255, 180, 71, 0.3);
+        }
+
+        /* Floating hearts in background */
+        .heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.2;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.2;
+            }
+            50% {
+                transform: translateY(-30px) rotate(8deg);
+                opacity: 0.3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .button-container {
+                gap: 15px;
+            }
+            
+            .button {
+                padding: 14px 30px;
+                font-size: 1.1rem;
+                min-width: 130px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-question {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .button {
+                width: 80%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container" id="heartContainer"></div>
+    
+    <div class="container">
+        <p class="question-intro">So I wanted to ask you something…</p>
+        <h1 class="main-question flutter">Will you be my Valentine?</h1>
+        <div class="button-container">
+            <button class="button yes-button" onclick="window.location.href='finale.html'">Yes 💖</button>
+            <button class="button no-button" id="noButton">No 🙈</button>
+        </div>
+    </div>
+
+    <script>
+        // Generate floating hearts
+        function createHeart() {
+            const container = document.getElementById('heartContainer');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💗';
+            
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const delay = Math.random() * 5;
+            const duration = 10 + Math.random() * 5;
+            
+            heart.style.left = x + '%';
+            heart.style.top = y + '%';
+            heart.style.animationDelay = delay + 's';
+            heart.style.animationDuration = duration + 's';
+            
+            container.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), (duration + delay) * 1000);
+        }
+
+        // Create hearts
+        setInterval(createHeart, 2000);
+        for (let i = 0; i < 5; i++) createHeart();
+
+        // Playful "No" button behavior
+        const noButton = document.getElementById('noButton');
+        let noClickCount = 0;
+
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 60);
+            noButton.style.position = 'fixed';
+            noButton.style.left = x + 'px';
+            noButton.style.top = y + 'px';
+            noButton.style.transition = 'all 0.3s ease';
+            noClickCount++;
+        }
+
+        noButton.addEventListener('mouseenter', moveButton);
+        noButton.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveButton();
+        });
+        noButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveButton();
+        });
+    </script>
+</body>
+</html>
